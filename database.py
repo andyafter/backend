@@ -7,13 +7,13 @@ db = SQLAlchemy(app)
 
 class HashtagPairs(db.Model):
     #id = db.Column(db.Integer, primary_key=True)
-    __tablename__ = 'HashtagPairs'
-    id = db.Column(db.Integer, primary_key=True)
-    tagpair = db.Column(db.String(120), unique=True)
-    count= db.Column(db.Integer, unique=True)
-    positive= db.Column(db.Integer, unique=True)
-    negative= db.Column(db.Integer, unique=True)
-    neutral= db.Column(db.Integer, unique=True)
+    __tablename__ = 'HashTagsPairs'
+    #id = db.Column(db.Integer, primary_key=True)
+    tagpair = db.Column(db.String(120),primary_key=True)
+    count= db.Column(db.Integer)
+    positive= db.Column(db.Integer)
+    negative= db.Column(db.Integer)
+    neutral= db.Column(db.Integer)
     def __init__(self, tagpair, count,positive,negative,neutral):
         self.tagpair = tagpair
         self.count = count

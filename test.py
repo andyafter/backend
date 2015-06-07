@@ -1,19 +1,29 @@
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
+from database import *
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-db = SQLAlchemy(app)
+f = open("testdata","r")
 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
+while True:
+    t = f.readline().split()
+    # count:   neg:  pos:  neu:
+    if not t:
+        break
+    tags = t[0]
+    count = int(t[1][6:])
+    neg = int(t[2][4:])
+    pos = int(t[3][4:])
+    neu = int(t[4][4:])
+    temp = HashtagPairs(tags,count,neg,pos,neu)
+    #print tags, count, neg, pos, neu
+    db.session.add(temp)
+    db.session.commit()
+    
+    
 
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
+f.close()
 
-    def __repr__(self):
-        return '<User %r>' % self.username
+
+a = HashtagPairs.query.all()
+print a
