@@ -2,7 +2,7 @@ from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from database import *
 
-f = open("testdata","r")
+f = open("alldata","r")
 
 
 while True:
@@ -11,6 +11,12 @@ while True:
     if not t:
         break
     tags = t[0]
+    a = HashtagPairs.query.filter_by(tagpair=tags).all()
+    print a
+    print "andy"
+    if len(a)>0:
+        print "duplicate "
+        continue
     count = int(t[1][6:])
     neg = int(t[2][4:])
     pos = int(t[3][4:])
@@ -26,4 +32,4 @@ f.close()
 
 
 a = HashtagPairs.query.all()
-print a
+print len(a)
