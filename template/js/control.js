@@ -22,7 +22,7 @@ $("#inputform").keydown(function(event) {
 function test(){
     var a = document.getElementById('taginput').value;
     console.log(a);
-    var url = "http://172.23.186.250:5000/search/";
+    var url = "http://10.10.3.31:5000/search/";
     var h = "%23";
     var table = document.getElementById("mytable");
     var row ;//= table.insertRow(0);
@@ -47,6 +47,43 @@ function test(){
     row =  table.insertRow(0);;
     //return xmlHttp.responseText;
     //console.log(a[0]);
+
+    var b = a.split(/(\s+)/);
+    if (b.length >1){
+	for(var m = 0; m<b.length;m++){
+	    if (b[m]=="#"){
+		b[m] = "%23" + b[m].slice([1,b.length]);
+	    }
+	    if(b[m]==" "){
+		b[m] = "%20";
+	    }
+	}
+	url = "http://10.10.3.31:5000/search/";
+	
+	xmlHttp.open( "GET", url, false );
+	xmlHttp.send( null );
+	//console.log(xmlHttp.responseText[1]);
+	var text = xmlHttp.responseText;
+	var result = JSON.parse(text);
+	//console.log(result[0][result[1][1]]);
+	for(var i=0;i<result[1].length;i++){
+	    row = table.insertRow(i+1);
+	    for(var j=0;j<5;j++){
+		cells[j] = row.insertCell(j);
+		//cells[j].innerHTML = result[0][result[1]];
+	    }
+	    cells[0].innerHTML = result[1][i];
+	    cells[1].innerHTML = result[0][result[1][i]].count;
+	    cells[2].innerHTML = result[0][result[1][i]].positive;
+	    cells[3].innerHTML = result[0][result[1][i]].negative;
+	    cells[4].innerHTML = result[0][result[1][i]].neutral;
+	}
+	return;
+    }
+
+
+
+
     if(a[0]=='#'){
 	//console.log(a.substring(1,a.length)); // that's the right form
 	url+=h;
