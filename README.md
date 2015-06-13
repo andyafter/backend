@@ -1,4 +1,4 @@
-# backend
+# Backend
 
 A backend server for cloud computing project. 
 
@@ -30,4 +30,16 @@ Also the **%23** is the escape for **"#"** in url.
 3. Go to chrome and go to 127.0.0.1:8000, in the **Table** there is an input and a search button, happy using them.
 
 And thanks for all the work that my teamates have done, it is actually already cool and amazing to make a hadoop application in such a short time. And I think this functionality is awesome.
+
+# How to configure database
+First make sure that you are running in a unix like system(better be macos). Second you need to make sure that sqlite works pretty well. 
+Open up IPython in this folder, type:
+- from database import *
+- db.create_all()
+- import test
+Noticing that this procedure can only be done once, if you came into some bugs and want to debug, there is somethings in the database that needs to be done first. If you don't mind every time you came across a bug you need to roll back by:
+- db.session.rollback()
+How ever I am a lazy person so everytime I can't solve the problem with a rollback I simply use the dirty way:
+- Change the **__tablename__** in **database.py**
+And you are welcome!
 
