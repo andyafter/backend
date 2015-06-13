@@ -37,9 +37,11 @@ Open up IPython in this folder, type:
 - from database import *
 - db.create_all()
 - import test
+
 Noticing that this procedure can only be done once, if you came into some bugs and want to debug, there is somethings in the database that needs to be done first. If you don't mind every time you came across a bug you need to roll back by:
 - db.session.rollback()
 How ever I am a lazy person so everytime I can't solve the problem with a rollback I simply use the dirty way:
 - Change the **__tablename__** in **database.py**
+
 And you are welcome!
 
